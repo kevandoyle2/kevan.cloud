@@ -40,6 +40,19 @@
     margin: 0 auto 0;
 }
 
+/* Continuous_Horizontal Layout */
+#idrviewer.layout-continuous_horizontal {
+    overflow: hidden;
+
+    /*-webkit-scroll-snap-type: mandatory;*/
+    /*-webkit-scroll-snap-points-x: repeat(100%);*/
+}
+
+.layout-continuous_horizontal .page {
+    display: inline-block;
+    transform: translate3d(0, 0, 0);
+}
+
 /* Magazine Layout */
 .layout-magazine .page {
     visibility: hidden;
