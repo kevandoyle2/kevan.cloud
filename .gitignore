@@ -1,0 +1,2 @@
+# Directory for SSL verification files with IIS
+*.well-known
