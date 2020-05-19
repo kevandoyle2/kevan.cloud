@@ -3,3 +3,6 @@
 
 # Other directories
 temp/
+
+# Misc
+*.DS_Store
