@@ -23,7 +23,15 @@ jobs:
 
     - name: Deploy to S3
       run: |
+        # Sync everything except mp4 files
         aws s3 sync ./ s3://aws.kevan.cloud \
           --delete \
           --exclude ".git/*" \
-          --exclude ".github/*"
+          --exclude ".github/*" \
+          --exclude "*.mp4"
+
+        # Sync mp4 files separately with correct Content-Type
+        aws s3 sync ./ s3://aws.kevan.cloud \
+          --exclude "*" \
+          --include "*.mp4" \
+          --content-type "video/mp4"
