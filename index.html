@@ -245,12 +245,13 @@
       (function () {
         var v1 = document.getElementById('vid1');
         var v2 = document.getElementById('vid2');
+        var started = false;
 
         v2.load();
 
         function swap(incoming, outgoing, reattach) {
           incoming.currentTime = 0;
-          incoming.play();
+          incoming.play().catch(function(){});
           incoming.style.opacity = '1';
           outgoing.style.opacity = '0';
           reattach();
@@ -274,7 +275,25 @@
           });
         }
 
-        attachV1();
+        function startPlayback() {
+          if (started) return;
+          started = true;
+          v1.play().then(function() {
+            attachV1();
+          }).catch(function(){});
+        }
+
+        // Try autoplay first
+        v1.play().then(function() {
+          started = true;
+          attachV1();
+        }).catch(function() {
+          // Autoplay blocked — start on first user interaction
+          document.addEventListener('click', startPlayback, { once: true });
+          document.addEventListener('keydown', startPlayback, { once: true });
+          document.addEventListener('touchstart', startPlayback, { once: true });
+          document.addEventListener('mousemove', startPlayback, { once: true });
+        });
       })();
     </script>
 
