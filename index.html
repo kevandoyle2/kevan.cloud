@@ -56,7 +56,7 @@
         height: 100%;
         object-fit: cover;
         z-index: -1;
-        transition: opacity 0.05s;
+        transition: opacity 0.8s ease;
       }
 
       body::after {
@@ -235,7 +235,7 @@
 
   <body>
     <!-- Two videos for seamless looping -->
-    <video class="bg-video" id="vid1" autoplay muted playsinline poster="images/FullSizeRender.jpg">
+    <video class="bg-video" id="vid1" autoplay muted playsinline poster="images/FullSizeRender.jpg" style="opacity:0;">
       <source src="images/waterfall.mp4" type="video/mp4" />
     </video>
     <video class="bg-video" id="vid2" muted playsinline style="opacity:0;">
@@ -280,6 +280,7 @@
           if (started) return;
           started = true;
           v1.play().then(function() {
+            v1.style.opacity = '1';
             attachV1();
           }).catch(function(){});
         }
@@ -287,6 +288,7 @@
         // Try autoplay first
         v1.play().then(function() {
           started = true;
+          v1.style.opacity = '1';
           attachV1();
         }).catch(function() {
           // Autoplay blocked — start on first user interaction
